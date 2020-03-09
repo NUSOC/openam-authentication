@@ -123,14 +123,18 @@ function openam_sso() {
 		$tokenId = trim($_COOKIE[ OPENAM_COOKIE_NAME ], '"');
 		if ( ! empty( $tokenId ) && ! is_user_logged_in() ) {
 			openam_debug( 'openam_auth: TOKENID:' . $tokenId );
+
 			if ( $am_response = openam_sessionsdata( $tokenId ) ) {
 
 				openam_debug( 'openam_auth: Authentication was successful SUCCESS' );
 				openam_debug( 'openam_auth: am_response ' . print_r( $am_response, true ) );
 
-				$amAttributes = getAttributesFromOpenAM( $tokenId, $am_response[ OPENAM_WORDPRESS_ATTRIBUTES_USERNAME ], OPENAM_WORDPRESS_ATTRIBUTES );
-				$usernameAttr = openam_get_attribute_value( $amAttributes, OPENAM_WORDPRESS_ATTRIBUTES_USERNAME );
-				$mailAttr = openam_get_attribute_value( $amAttributes, OPENAM_WORDPRESS_ATTRIBUTES_MAIL );
+				// ERROR TRAP: Adding @ before this function to suppress warnings about headers
+
+                $amAttributes = @getAttributesFromOpenAM( $tokenId, $am_response[ OPENAM_WORDPRESS_ATTRIBUTES_USERNAME ], OPENAM_WORDPRESS_ATTRIBUTES );
+                $usernameAttr = openam_get_attribute_value( $amAttributes, OPENAM_WORDPRESS_ATTRIBUTES_USERNAME );
+                $mailAttr = openam_get_attribute_value( $amAttributes, OPENAM_WORDPRESS_ATTRIBUTES_MAIL );
+
 
 				openam_debug( 'openam_auth: UID: ' . print_r( $usernameAttr, true ) );
 				openam_debug( 'openam_auth: MAIL: ' . print_r( $mailAttr, true ) );
