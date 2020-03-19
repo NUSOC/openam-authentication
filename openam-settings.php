@@ -45,6 +45,21 @@ function openam_settings_init() {
 	register_setting( 'openam_options', 'openam_sslverify', 'openam_sslverify_sanitize_callback' );
 
 
+
+
+    // Forked. Additional settings that are required for the forked method.
+	register_setting( 'openam_options', 'openam_forked_apigeeApiKey' );
+	register_setting( 'openam_options', 'openam_forked_webSSOApi' );
+	register_setting( 'openam_options', 'openam_forked_cookieName' );
+	register_setting( 'openam_options', 'openam_forked_returnURL' );
+	register_setting( 'openam_options', 'openam_forked_ssoRedirectURL' );
+	register_setting( 'openam_options', 'openam_forked_requiresMFA' );
+	register_setting( 'openam_options', 'openam_forked_DirectoryBasicSearchEndPoint' );
+	register_setting( 'openam_options', 'openam_forked_DirectoryBasicSearchEndPointAPIKEY' );
+
+
+
+
 	/**
 	 * Sections
 	 */
@@ -75,6 +90,14 @@ function openam_settings_init() {
 		'openam_settings_section_wordpress_callback',
 		'openam_options'
 	);
+
+	// Forked: Section
+    add_settings_section(
+        'openam_forked_settings_section',
+        __( 'Forked Settings', 'openam-auth' ),
+        'openam_settings_section_wordpress_callback',
+        'openam_options'
+    );
 
 	add_settings_section(
 		'openam_debug_settings_section',
@@ -165,7 +188,74 @@ function openam_settings_init() {
 		'openam_openam_settings_section'
 	);
 
-	/* WordPress Settings Fields */
+
+	// Forked settings
+    add_settings_field(
+        'openam_forked_apigeeApiKey',
+        __( 'Apigee API Key', 'openam-auth' ),
+        'openam_forked_apigeeApiKey_settings_field_render',
+        'openam_options',
+        'openam_forked_settings_section'
+    );
+
+    add_settings_field(
+        'openam_forked_webSSOApi',
+        __( 'Web SSO Api', 'openam-auth' ),
+        'openam_forked_webSSOApi_settings_field_render',
+        'openam_options',
+        'openam_forked_settings_section'
+    );
+
+    add_settings_field(
+        'openam_forked_cookieName',
+        __( 'Cookie Name', 'openam-auth' ),
+        'openam_forked_cookieName_settings_field_render',
+        'openam_options',
+        'openam_forked_settings_section'
+    );
+
+    add_settings_field(
+        'openam_forked_returnURL',
+        __( 'Return URL', 'openam-auth' ),
+        'openam_forked_returnURL_settings_field_render',
+        'openam_options',
+        'openam_forked_settings_section'
+    );
+
+    add_settings_field(
+        'openam_forked_ssoRedirectURL',
+        __( 'ssoRedirectURL', 'openam-auth' ),
+        'openam_forked_ssoRedirectURL_settings_field_render',
+        'openam_options',
+        'openam_forked_settings_section'
+    );
+
+    add_settings_field(
+        'openam_forked_requiresMFA',
+        __( 'Requires MFA', 'openam-auth' ),
+        'openam_forked_requiresMFA_settings_field_render',
+        'openam_options',
+        'openam_forked_settings_section'
+    );
+
+    add_settings_field(
+        'openam_forked_DirectoryBasicSearchEndPoint',
+        __( 'Directory Basic Search End Point', 'openam-auth' ),
+        'openam_forked_DirectoryBasicSearchEndPoint_settings_field_render',
+        'openam_options',
+        'openam_wordpress_settings_section'
+    );
+
+    add_settings_field(
+        'openam_forked_DirectoryBasicSearchEndPointAPIKEY',
+        __( 'Directory Basic Search End Point API KEY', 'openam-auth' ),
+        'openam_forked_DirectoryBasicSearchEndPointAPIKEY_settings_field_render',
+        'openam_options',
+        'openam_wordpress_settings_section'
+    );
+/**/
+
+    /* WordPress Settings Fields */
 
 	add_settings_field(
 		'openam_logout_too',
@@ -198,6 +288,8 @@ function openam_settings_init() {
 		'openam_options',
 		'openam_wordpress_settings_section'
 	);
+
+
 
 	/* Debugging Settings Fields */
 
@@ -257,9 +349,12 @@ function openam_api_version_settings_field_render() {
 
 	$openam_api_version = get_option( 'openam_api_version' );
 	?>
+
+    <!-- Forked: Adding an additional option adding 'forked'  -->
 	<select name="openam_api_version" id="openam_api_version">
 		<option value="1.0" <?php selected( '1.0', $openam_api_version ); ?>>1.0 (OpenAM 12 and 13)</option>
 		<option value="legacy" <?php selected( 'legacy', $openam_api_version ); ?>>Legacy (OpenAM 9, 10 and 11)</option>
+        <option value="forked" <?php selected( 'forked', $openam_api_version ); ?>>Unofficial Forked Method (2020)</option>
 	</select>
 
 	<p class="description" style="<?php if ( '1.0' != $openam_api_version ) { echo 'display:none;'; } ?>" data-openam-api-version="1.0">
@@ -268,6 +363,11 @@ function openam_api_version_settings_field_render() {
 	<p class="description" style="<?php if ( 'legacy' != $openam_api_version ) { echo 'display:none;'; } ?>" data-openam-api-version='legacy'>
 		<?php esc_html_e( 'Legacy mode is selected. SSO is available.', 'openam-auth' ); ?>
 	</p>
+
+    <!-- Forked description -->
+    <p class="description" style="<?php if ( 'forked' != $openam_api_version ) { echo 'display:none;'; } ?>" data-openam-api-version='forked'>
+        <?php esc_html_e( 'This is a custom experimental method for Agent-less SSO.', 'openam-auth' ); ?>
+    </p>
 
 	<script>
 	jQuery('#openam_api_version').on( 'change', function() {
@@ -454,7 +554,99 @@ function openam_debug_file_settings_field_render() {
 	<?php
 
 }
+/**/
 
+
+// Forked openam_forked_apigeeApiKey
+function openam_forked_apigeeApiKey_settings_field_render() {
+
+	?>
+	<input type="text" name="openam_forked_apigeeApiKey" value="<?php echo esc_attr( get_option( 'openam_forked_apigeeApiKey' ) ); ?>" class="regular-text code"/>
+	<p class="description">
+		<?php esc_html_e( 'Apigee API Key', 'openam-auth' ); ?>
+	</p>
+	<?php
+
+}
+
+function openam_forked_webSSOApi_settings_field_render() {
+
+	?>
+	<input type="text" name="openam_forked_webSSOApi" value="<?php echo esc_attr( get_option( 'openam_forked_webSSOApi' ) ); ?>" class="regular-text code"/>
+	<p class="description">
+		<?php esc_html_e( 'WebSSOApi', 'openam-auth' ); ?>
+	</p>
+	<?php
+
+}
+
+
+function openam_forked_cookieName_settings_field_render() {
+
+    ?>
+    <input type="text" name="openam_forked_cookieName" value="<?php echo esc_attr( get_option( 'openam_forked_cookieName' ) ); ?>" class="regular-text code"/>
+    <p class="description">
+        <?php esc_html_e( 'Cookie Name', 'openam-auth' ); ?>
+    </p>
+    <?php
+
+}
+
+function openam_forked_returnURL_settings_field_render() {
+
+    ?>
+    <input type="text" name="openam_forked_returnURL" value="<?php echo esc_attr( get_option( 'openam_forked_returnURL' ) ); ?>" class="regular-text code"/>
+    <p class="description">
+        <?php esc_html_e( 'Return URL', 'openam-auth' ); ?>
+    </p>
+    <?php
+
+}
+
+function openam_forked_ssoRedirectURL_settings_field_render() {
+
+    ?>
+    <input type="text" name="openam_forked_ssoRedirectURL" value="<?php echo esc_attr( get_option( 'openam_forked_ssoRedirectURL' ) ); ?>" class="regular-text code"/>
+    <p class="description">
+        <?php esc_html_e( 'SSO Redirect URL', 'openam-auth' ); ?>
+    </p>
+    <?php
+
+}
+
+function openam_forked_requiresMFA_settings_field_render() {
+
+    ?>
+    <input type="text" name="openam_forked_requiresMFA" value="<?php echo esc_attr( get_option( 'openam_forked_requiresMFA' ) ); ?>" class="regular-text code"/>
+    <p class="description">
+        <?php esc_html_e( 'Requires MFA', 'openam-auth' ); ?>
+    </p>
+    <?php
+
+}
+
+
+function openam_forked_DirectoryBasicSearchEndPoint_settings_field_render() {
+
+    ?>
+    <input type="text" name="openam_forked_DirectoryBasicSearchEndPoint" value="<?php echo esc_attr( get_option( 'openam_forked_DirectoryBasicSearchEndPoint' ) ); ?>" class="regular-text code"/>
+    <p class="description">
+        <?php esc_html_e( 'DirectoryBasicSearchEndPoint', 'openam-auth' ); ?>
+    </p>
+    <?php
+
+}
+
+function openam_forked_DirectoryBasicSearchEndPointAPIKEY_settings_field_render() {
+
+    ?>
+    <input type="text" name="openam_forked_DirectoryBasicSearchEndPointAPIKEY" value="<?php echo esc_attr( get_option( 'openam_forked_DirectoryBasicSearchEndPointAPIKEY' ) ); ?>" class="regular-text code"/>
+    <p class="description">
+        <?php esc_html_e( 'Directory Basic Search End Point API KEY', 'openam-auth' ); ?>
+    </p>
+    <?php
+
+}
 
 function openam_settings_section_api_callback() {
 	//esc_html_e( 'This section description', 'openam-auth' );
@@ -472,6 +664,11 @@ function openam_settings_section_openam_callback() {
 
 
 function openam_settings_section_wordpress_callback() {
+	//esc_html_e( 'This section description', 'openam-auth' );
+}
+
+
+function openam_settings_section_forked_callback() {
 	//esc_html_e( 'This section description', 'openam-auth' );
 }
 

@@ -114,6 +114,17 @@ function openam_setup_constants() {
  * Auto-login the user
  */
 function openam_sso() {
+
+    // Forked: Decision point to branch off to forked method. If true,
+    // just offer a return to negate any instruction below.
+    if (OPENAM_API_VERSION == 'forked') {
+        openam_forked_decision_point();
+        return;
+    }
+
+
+
+
 	if ( ( isset( $_GET['action'] ) && 'logout' == $_GET['action'] ) || ( isset( $_GET['loggedout'] ) && 'yes' == $_GET['loggedout'] ) ) {
 		return;
 	}
@@ -131,7 +142,7 @@ function openam_sso() {
 
 				// ERROR TRAP: Adding @ before this function to suppress warnings about headers
 
-                $amAttributes = @getAttributesFromOpenAM( $tokenId, $am_response[ OPENAM_WORDPRESS_ATTRIBUTES_USERNAME ], OPENAM_WORDPRESS_ATTRIBUTES );
+                $amAttributes = getAttributesFromOpenAM( $tokenId, $am_response[ OPENAM_WORDPRESS_ATTRIBUTES_USERNAME ], OPENAM_WORDPRESS_ATTRIBUTES );
                 $usernameAttr = openam_get_attribute_value( $amAttributes, OPENAM_WORDPRESS_ATTRIBUTES_USERNAME );
                 $mailAttr = openam_get_attribute_value( $amAttributes, OPENAM_WORDPRESS_ATTRIBUTES_MAIL );
 
@@ -153,6 +164,13 @@ function openam_sso() {
 
 /* Main function */
 function openam_auth( $user, $username, $password ) {
+
+    // Forked: Decision point to branch off to forked method. If true,
+    // just offer a return to negate any instruction below.
+    if (OPENAM_API_VERSION == 'forked') {
+        openam_forked_decision_point();
+        return;
+    }
 
 	if ( OPENAM_REST_ENABLED ) {
 
@@ -187,6 +205,15 @@ function openam_auth( $user, $username, $password ) {
  * Validate a session
  */
 function openam_sessionsdata( $tokenId ) {
+
+
+    // Forked: Decision point to branch off to forked method. If true,
+    // just offer a return to negate any instruction below.
+    if (OPENAM_API_VERSION == 'forked') {
+        openam_forked_decision_point();
+        return;
+    }
+
 
 	if ( ! OPENAM_LEGACY_APIS_ENABLED ) {
 		openam_debug( 'openam_sessionsdata: Legacy Mode Disabled' );
@@ -264,6 +291,9 @@ function loadUser( $login, $mail ) {
 
 /* Authenticates a user in OpenAM using the credentials passed  */
 function authenticateWithOpenAM( $username, $password ) {
+
+
+
 	if ( ! OPENAM_LEGACY_APIS_ENABLED ) {
 		return authenticateWithModernOpenAM( $username, $password );
 	} else {
@@ -552,6 +582,7 @@ function createOpenAMLoginURL() {
 }
 
 function openam_login_url( $login_url, $redirect = null ) {
+
 	openam_debug('openam_login_url: The current login URL is: ' . $login_url);
 
 	if ( OPENAM_DO_REDIRECT ) {
@@ -590,11 +621,55 @@ function openam_get_attribute_value( $attributes, $attributeId ) {
 		return $attributes[ $attributeId ];
 	}
 }
-
+/**/
 
 /**
  * Load the translation
  */
 function openam_i18n() {
 	load_plugin_textdomain( 'openam-auth', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+}
+
+
+/**
+ * This is the insertion point that will handle the processing of
+ * OPENAM_API_VERSION == 'forked'
+ */
+function openam_forked_decision_point() {
+    include_once('laravel_openam2020/src/OpenAM2020.php');
+
+    // DEBUG: i want to see all errors
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+
+    // create object with all necessary information, keys, etc
+    $o = new \soc\OpenAM2020(
+        get_option('openam_forked_apigeeApiKey'),
+        get_option('openam_forked_webSSOApi'),
+        get_option('openam_forked_cookieName'),
+        get_option('openam_forked_returnURL'),
+        get_option('openam_forked_ssoRedirectURL'),
+        get_option('openam_forked_requiresMFA'),
+        get_option('openam_forked_DirectoryBasicSearchEndPoint'),
+        get_option('openam_forked_DirectoryBasicSearchEndPointAPIKEY'),
+
+    );
+
+    $o->runAction();
+
+    // TODO: do something other than dumping the object
+    echo '<pre>';
+    print_r([
+        'function'=> __FUNCTION__,
+        $o,
+        get_option('openam_forked_apigeeApiKey'),
+        get_option('openam_forked_webSSOApi'),
+        get_option('openam_forked_cookieName'),
+        get_option('openam_forked_returnURL'),
+        get_option('openam_forked_ssoRedirectURL'),
+        get_option('openam_forked_requiresMFA'),
+        get_option('openam_forked_DirectoryBasicSearchEndPoint'),
+        get_option('openam_forked_DirectoryBasicSearchEndPointAPIKEY'),
+    ]);
+    die();
 }
