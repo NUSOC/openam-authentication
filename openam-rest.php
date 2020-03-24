@@ -662,7 +662,7 @@ function openam_forked_decision_point() {
     print_r([
         'function'=> __FUNCTION__,
         $o,
-        get_option('openam_forked_apigeeApiKey'),
+       // get_option('openam_forked_apigeeApiKey'),
         get_option('openam_forked_webSSOApi'),
         get_option('openam_forked_cookieName'),
         get_option('openam_forked_returnURL'),
