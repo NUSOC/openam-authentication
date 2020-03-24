@@ -6,9 +6,10 @@
 ## To use
 ### From `wp-content/plugins`
 ```
-git clone http://....
+git clone https://github.com/NUSOC/openam-authentication.git
 cd openam-authentication
 git submodule update --init --recursive
+git pull --recurse-submodules
 wp plugin activate openam-authentication
 ```
 
