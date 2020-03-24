@@ -3,6 +3,22 @@
 ## Warning
 **This code is not supported by ForgeRock and it is your responsibility to verify that the software is suitable and safe for use.**
 
+## To use
+### From `wp-content/plugins`
+```
+git clone http://....
+cd openam-authentication
+git submodule update --init --recursive
+wp plugin activate openam-authentication
+```
+
+### From UI
+Set "Unofficial Forked 2020" and fill in all necessary fields in the under the *Forked* headline.  
+
+
+
+
+
 ## About
 
 Wordpress plugin to authenticate using OpenAM
