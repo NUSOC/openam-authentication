@@ -657,12 +657,13 @@ function openam_forked_decision_point() {
 
     $o->runAction();
 
-    // TODO: do something other than dumping the object
+	// TODO: do something other than dumping the object
+	/*get_option('openam_forked_apigeeApiKey'),*/
     echo '<pre>';
     print_r([
         'function'=> __FUNCTION__,
-        $o,
-       	/*get_option('openam_forked_apigeeApiKey'),*/
+        //$o,
+       	
         get_option('openam_forked_webSSOApi'),
         get_option('openam_forked_cookieName'),
         get_option('openam_forked_returnURL'),
