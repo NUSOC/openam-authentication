@@ -243,7 +243,7 @@ function openam_settings_init() {
         __( 'Directory Basic Search End Point', 'openam-auth' ),
         'openam_forked_DirectoryBasicSearchEndPoint_settings_field_render',
         'openam_options',
-        'openam_wordpress_settings_section'
+        'openam_forked_settings_section'
     );
 
     add_settings_field(
@@ -251,7 +251,7 @@ function openam_settings_init() {
         __( 'Directory Basic Search End Point API KEY', 'openam-auth' ),
         'openam_forked_DirectoryBasicSearchEndPointAPIKEY_settings_field_render',
         'openam_options',
-        'openam_wordpress_settings_section'
+        'openam_forked_settings_section'
     );
 /**/
 
