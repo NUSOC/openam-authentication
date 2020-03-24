@@ -637,7 +637,7 @@ function openam_forked_DirectoryBasicSearchEndPoint_settings_field_render() {
 
 }
 
-function openam_forked_DirectoryBasicSearchEndPointAPIKEY_settings_field_render() {
+function openam_forked_DirectoryBasicSearchEndPointAPIKEY_settings_field_render() { 
 
     ?>
     <input type="text" name="openam_forked_DirectoryBasicSearchEndPointAPIKEY" value="<?php echo esc_attr( get_option( 'openam_forked_DirectoryBasicSearchEndPointAPIKEY' ) ); ?>" class="regular-text code"/>
