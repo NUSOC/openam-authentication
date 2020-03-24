@@ -664,11 +664,11 @@ function openam_forked_decision_point() {
         'function'=> __FUNCTION__,
         //$o,
        	
-        get_option('openam_forked_webSSOApi'),
-        get_option('openam_forked_cookieName'),
-        get_option('openam_forked_returnURL'),
-        get_option('openam_forked_ssoRedirectURL'),
-        get_option('openam_forked_requiresMFA'),
+        'openam_forked_webSSOApi' => get_option('openam_forked_webSSOApi'),
+        'openam_forked_cookieName' => get_option('openam_forked_cookieName'),
+        'openam_forked_returnURL' => get_option('openam_forked_returnURL'),
+        'openam_forked_ssoRedirectURL'=>get_option('openam_forked_ssoRedirectURL'),
+        'openam_forked_requiresMFA'=>get_option('openam_forked_requiresMFA'),
         'openam_forked_DirectoryBasicSearchEndPoint' => get_option('openam_forked_DirectoryBasicSearchEndPoint'),
         'openam_forked_DirectoryBasicSearchEndPointAPIKEY' => get_option('openam_forked_DirectoryBasicSearchEndPointAPIKEY'),
     ]);
