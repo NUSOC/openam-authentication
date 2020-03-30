@@ -51,7 +51,6 @@ function openam_settings_init() {
 	register_setting( 'openam_options', 'openam_forked_apigeeApiKey' );
 	register_setting( 'openam_options', 'openam_forked_webSSOApi' );
 	register_setting( 'openam_options', 'openam_forked_cookieName' );
-	register_setting( 'openam_options', 'openam_forked_returnURL' );
 	register_setting( 'openam_options', 'openam_forked_ssoRedirectURL' );
 	register_setting( 'openam_options', 'openam_forked_requiresMFA' );
 	register_setting( 'openam_options', 'openam_forked_DirectoryBasicSearchEndPoint' );
@@ -214,13 +213,6 @@ function openam_settings_init() {
         'openam_forked_settings_section'
     );
 
-    add_settings_field(
-        'openam_forked_returnURL',
-        __( 'Return URL', 'openam-auth' ),
-        'openam_forked_returnURL_settings_field_render',
-        'openam_options',
-        'openam_forked_settings_section'
-    );
 
     add_settings_field(
         'openam_forked_ssoRedirectURL',
@@ -592,16 +584,7 @@ function openam_forked_cookieName_settings_field_render() {
 
 }
 
-function openam_forked_returnURL_settings_field_render() {
 
-    ?>
-    <input type="text" name="openam_forked_returnURL" value="<?php echo esc_attr( get_option( 'openam_forked_returnURL' ) ); ?>" class="regular-text code"/>
-    <p class="description">
-        <?php esc_html_e( 'Return URL', 'openam-auth' ); ?>
-    </p>
-    <?php
-
-}
 
 function openam_forked_ssoRedirectURL_settings_field_render() {
 

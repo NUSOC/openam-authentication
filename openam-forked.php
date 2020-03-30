@@ -69,12 +69,16 @@ class OpenAMForkedUtilities
         }
 
 
+        // Format return URL
+        $returnURL = 'https://' . $_SERVER['SERVER_NAME'];
+
+
         // create object with all necessary information, keys, etc
         $o = new \soc\OpenAM2020(
             get_option('openam_forked_apigeeApiKey'),
             get_option('openam_forked_webSSOApi'),
             get_option('openam_forked_cookieName'),
-            get_option('openam_forked_returnURL'),
+            $returnURL,  //get_option('openam_forked_returnURL'),
             get_option('openam_forked_ssoRedirectURL'),
             get_option('openam_forked_requiresMFA'),
             get_option('openam_forked_DirectoryBasicSearchEndPoint'),
@@ -123,7 +127,6 @@ class OpenAMForkedUtilities
         self::debug([
             'openam_forked_webSSOApi' => get_option('openam_forked_webSSOApi'),
             'openam_forked_cookieName' => get_option('openam_forked_cookieName'),
-            'openam_forked_returnURL' => get_option('openam_forked_returnURL'),
             'openam_forked_ssoRedirectURL' => get_option('openam_forked_ssoRedirectURL'),
             'openam_forked_requiresMFA' => get_option('openam_forked_requiresMFA'),
             'openam_forked_DirectoryBasicSearchEndPoint' => get_option('openam_forked_DirectoryBasicSearchEndPoint'),
