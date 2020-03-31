@@ -69,7 +69,8 @@ class OpenAMForkedUtilities
         }
 
 
-        // Format return URL
+        // Format return URL. This was a setting but it's still better to automatically
+        // set this from $_SERVER variables.
         $returnURL = 'https://' . $_SERVER['SERVER_NAME'];
 
 
@@ -78,9 +79,9 @@ class OpenAMForkedUtilities
             get_option('openam_forked_apigeeApiKey'),
             get_option('openam_forked_webSSOApi'),
             get_option('openam_forked_cookieName'),
-            $returnURL,  //get_option('openam_forked_returnURL'),
+            $returnURL,
             get_option('openam_forked_ssoRedirectURL'),
-            get_option('openam_forked_requiresMFA'),
+             get_option('openam_forked_requiresMFA'),
             get_option('openam_forked_DirectoryBasicSearchEndPoint'),
             get_option('openam_forked_DirectoryBasicSearchEndPointAPIKEY')
         );

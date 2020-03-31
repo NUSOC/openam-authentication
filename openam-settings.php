@@ -51,6 +51,7 @@ function openam_settings_init() {
 	register_setting( 'openam_options', 'openam_forked_apigeeApiKey' );
 	register_setting( 'openam_options', 'openam_forked_webSSOApi' );
 	register_setting( 'openam_options', 'openam_forked_cookieName' );
+	register_setting( 'openam_options', 'openam_forked_returnURL' );
 	register_setting( 'openam_options', 'openam_forked_ssoRedirectURL' );
 	register_setting( 'openam_options', 'openam_forked_requiresMFA' );
 	register_setting( 'openam_options', 'openam_forked_DirectoryBasicSearchEndPoint' );
@@ -358,7 +359,10 @@ function openam_api_version_settings_field_render() {
 
     <!-- Forked description -->
     <p class="description" style="<?php if ( 'forked' != $openam_api_version ) { echo 'display:none;'; } ?>" data-openam-api-version='forked'>
-        <?php esc_html_e( 'This is a custom experimental method for Agent-less SSO.', 'openam-auth' ); ?>
+        <?php esc_html_e(
+                'This is a custom experimental method for Agent-less SSO. See "Forked" section for all configuration. ',
+                'openam-auth' );
+        ?>
     </p>
 
 	<script>
@@ -592,7 +596,14 @@ function openam_forked_ssoRedirectURL_settings_field_render() {
     <input type="text" name="openam_forked_ssoRedirectURL" value="<?php echo esc_attr( get_option( 'openam_forked_ssoRedirectURL' ) ); ?>" class="regular-text code"/>
     <p class="description">
         <?php esc_html_e( 'SSO Redirect URL', 'openam-auth' ); ?>
+        DUO is controlled through the query string value of <code>authIndexValue</code>.
+        <br>Require two-factor with DUO
+        <br><code>Location: https://subdomain.domain.edu/nusso/XUI/?realm=your_realm#login&authIndexType=service&authIndexValue=ldap-and-duo&goto=</code>
+        <br>Only NetID and password (NO DUO)
+        <br/><code>Location: https://subdomain.domain.edu/nusso/XUI/?realm=your_realm#login&authIndexType=service&authIndexValue=ldap-registry&goto=</code>
+
     </p>
+
     <?php
 
 }
@@ -603,6 +614,8 @@ function openam_forked_requiresMFA_settings_field_render() {
     <input type="text" name="openam_forked_requiresMFA" value="<?php echo esc_attr( get_option( 'openam_forked_requiresMFA' ) ); ?>" class="regular-text code"/>
     <p class="description">
         <?php esc_html_e( 'Requires MFA', 'openam-auth' ); ?>
+        <br>While this value should be true or false, I don't think the end point is respecting this data point. MFA/DUO is
+        controlled by the <code>SSO Redirect URL</code> field.
     </p>
     <?php
 
@@ -615,6 +628,7 @@ function openam_forked_DirectoryBasicSearchEndPoint_settings_field_render() {
     <input type="text" name="openam_forked_DirectoryBasicSearchEndPoint" value="<?php echo esc_attr( get_option( 'openam_forked_DirectoryBasicSearchEndPoint' ) ); ?>" class="regular-text code"/>
     <p class="description">
         <?php esc_html_e( 'DirectoryBasicSearchEndPoint', 'openam-auth' ); ?>
+        <br>This is the endpoint used to retrieve the email address associated with the NetID.
     </p>
     <?php
 
@@ -626,6 +640,7 @@ function openam_forked_DirectoryBasicSearchEndPointAPIKEY_settings_field_render(
     <input type="text" name="openam_forked_DirectoryBasicSearchEndPointAPIKEY" value="<?php echo esc_attr( get_option( 'openam_forked_DirectoryBasicSearchEndPointAPIKEY' ) ); ?>" class="regular-text code"/>
     <p class="description">
         <?php esc_html_e( 'Directory Basic Search End Point API KEY', 'openam-auth' ); ?>
+        <br>The API key associated with <i>Basic Directory Search</i>
     </p>
     <?php
 
