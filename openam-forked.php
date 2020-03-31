@@ -81,7 +81,7 @@ class OpenAMForkedUtilities
             get_option('openam_forked_cookieName'),
             $returnURL,
             get_option('openam_forked_ssoRedirectURL'),
-             get_option('openam_forked_requiresMFA'),
+            get_option('openam_forked_requiresMFA'),
             get_option('openam_forked_DirectoryBasicSearchEndPoint'),
             get_option('openam_forked_DirectoryBasicSearchEndPointAPIKEY')
         );

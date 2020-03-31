@@ -12,6 +12,12 @@ git submodule update --init --recursive
 git pull --recurse-submodules
 wp plugin activate openam-authentication
 ```
+Alternatively, if the above is not copying the most recent copy of the Laravel Plugin directly 
+
+```
+cd openam-authentication
+git clone https://github.com/NUSOC/laravel_openam2020.git
+```
 
 ### From UI
 Set "Unofficial Forked 2020" and fill in all necessary fields in the under the *Forked* headline.  
@@ -19,7 +25,7 @@ Set "Unofficial Forked 2020" and fill in all necessary fields in the under the *
 
 
 
-
+### ORIGINAL DOCUMENTATION
 ## About
 
 Wordpress plugin to authenticate using OpenAM

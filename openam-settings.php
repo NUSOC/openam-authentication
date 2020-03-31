@@ -63,14 +63,25 @@ function openam_settings_init() {
 	/**
 	 * Sections
 	 */
-	add_settings_section(
+
+
+
+    add_settings_section(
 		'openam_api_settings_section',
 		__( 'API Settings', 'openam-auth' ),
 		'openam_settings_section_api_callback',
 		'openam_options'
 	);
 
-	add_settings_section(
+    // Forked: Section
+    add_settings_section(
+        'openam_forked_settings_section',
+        __( 'Forked Settings', 'openam-auth' ),
+        'openam_settings_section_wordpress_callback',
+        'openam_options'
+    );
+
+    add_settings_section(
 		'openam_cookies_settings_section',
 		__( 'Cookie Settings', 'openam-auth' ),
 		'openam_settings_section_cookies_callback',
@@ -91,13 +102,6 @@ function openam_settings_init() {
 		'openam_options'
 	);
 
-	// Forked: Section
-    add_settings_section(
-        'openam_forked_settings_section',
-        __( 'Forked Settings', 'openam-auth' ),
-        'openam_settings_section_wordpress_callback',
-        'openam_options'
-    );
 
 	add_settings_section(
 		'openam_debug_settings_section',
