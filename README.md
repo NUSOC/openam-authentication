@@ -1,7 +1,15 @@
 # openam-authentication plugin
 
 ## Warning
-**This code is not supported by ForgeRock and it is your responsibility to verify that the software is suitable and safe for use.**
+*This code is not supported by ForgeRock and it is your responsibility to verify that the software is suitable and safe for use.*
+
+We're building this to transition our wordpress installations from FR OpenAM to our institutions. We've added a third option:
+- 1.0
+- Legacy
+- Unofficially Forked 
+
+This third option allows for the Agent-less API call.  
+
 
 ## To use
 ### From `wp-content/plugins`
