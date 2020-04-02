@@ -12,10 +12,10 @@ class OpenAM2020
 
     protected $apigeeApiKey;
     protected $webSSOApi;
-    protected $cookieName;
+   // protected $cookieName;
     protected $returnURL;
     protected $ssoRedirectURL;
-    protected $requiresMFA;
+    // protected $requiresMFA;
     protected $DirectoryBasicSearchEndPoint;
     protected $DirectoryBasicSearchEndPointAPIKEY;
 
@@ -25,18 +25,17 @@ class OpenAM2020
      * @param $webSSOApi
      * @param $returnURL
      * @param $ssoRedirectURL
-     * @param bool $requiresMFA
      * @param $DirectoryBasicSearchEndPoint
      * @param $DirectoryBasicSearchEndPointAPIKEY
      */
-    public function __construct($apigeeApiKey, $webSSOApi, $returnURL, $ssoRedirectURL, $requiresMFA = true, $DirectoryBasicSearchEndPoint, $DirectoryBasicSearchEndPointAPIKEY)
+    public function __construct($apigeeApiKey, $webSSOApi, $returnURL, $ssoRedirectURL, $DirectoryBasicSearchEndPoint, $DirectoryBasicSearchEndPointAPIKEY)
     {
         $this->apigeeApiKey = $apigeeApiKey;
         $this->webSSOApi = $webSSOApi;
         //$this->cookieName = $cookieName;
         $this->returnURL = $returnURL;
         $this->ssoRedirectURL = $ssoRedirectURL;
-        $this->requiresMFA = $requiresMFA;
+       // $this->requiresMFA = $requiresMFA;
         $this->DirectoryBasicSearchEndPoint = $DirectoryBasicSearchEndPoint;
         $this->DirectoryBasicSearchEndPointAPIKEY = $DirectoryBasicSearchEndPointAPIKEY;
     }
@@ -115,7 +114,7 @@ class OpenAM2020
                     "Content-Length: 0",
                     "apikey: " . $this->apigeeApiKey,
                     "webssotoken: $token",
-                    "requiresMFA: " . $this->requiresMFA,
+                 //   "requiresMFA: " . $this->requiresMFA,
                     "goto: ", // not using this functionality
                 ]),
                 'ignore_errors' => false,

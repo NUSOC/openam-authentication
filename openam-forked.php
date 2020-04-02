@@ -78,7 +78,7 @@ class OpenAMForkedUtilities
 
         // create object with all necessary information, keys, etc
         $o = new \soc\OpenAM2020(
-            get_option('openam_forked_apigeeApiKey'), get_option('openam_forked_webSSOApi'), $returnURL, get_option('openam_forked_ssoRedirectURL'), get_option('openam_forked_requiresMFA'), get_option('openam_forked_DirectoryBasicSearchEndPoint'), get_option('openam_forked_DirectoryBasicSearchEndPointAPIKEY')
+            get_option('openam_forked_apigeeApiKey'), get_option('openam_forked_webSSOApi'), $returnURL, get_option('openam_forked_ssoRedirectURL'), get_option('openam_forked_DirectoryBasicSearchEndPoint'), get_option('openam_forked_DirectoryBasicSearchEndPointAPIKEY')
         );
 
 
