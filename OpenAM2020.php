@@ -6,6 +6,11 @@ namespace soc;
  * Class OpenAM2020
  * @package soc
  */
+
+// WP
+defined('ABSPATH') or die();
+
+
 class OpenAM2020
 {
 
