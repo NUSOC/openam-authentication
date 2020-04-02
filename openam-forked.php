@@ -62,6 +62,8 @@ class OpenAMForkedUtilities
         $is_user_admin = is_user_admin();
 
 
+            $cookieName = get_option('openam_forked_cookieName');
+
         // If the user is already loged in this is not necessary. So
         // just send the user back and let the page continue processing.
         if ($is_user_logged_in) {
@@ -76,14 +78,7 @@ class OpenAMForkedUtilities
 
         // create object with all necessary information, keys, etc
         $o = new \soc\OpenAM2020(
-            get_option('openam_forked_apigeeApiKey'),
-            get_option('openam_forked_webSSOApi'),
-            get_option('openam_forked_cookieName'),
-            $returnURL,
-            get_option('openam_forked_ssoRedirectURL'),
-            get_option('openam_forked_requiresMFA'),
-            get_option('openam_forked_DirectoryBasicSearchEndPoint'),
-            get_option('openam_forked_DirectoryBasicSearchEndPointAPIKEY')
+            get_option('openam_forked_apigeeApiKey'), get_option('openam_forked_webSSOApi'), $returnURL, get_option('openam_forked_ssoRedirectURL'), get_option('openam_forked_requiresMFA'), get_option('openam_forked_DirectoryBasicSearchEndPoint'), get_option('openam_forked_DirectoryBasicSearchEndPointAPIKEY')
         );
 
 

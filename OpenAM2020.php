@@ -23,18 +23,17 @@ class OpenAM2020
      * OpenAM2020 constructor.
      * @param $apigeeApiKey
      * @param $webSSOApi
-     * @param $cookieName
      * @param $returnURL
      * @param $ssoRedirectURL
      * @param bool $requiresMFA
      * @param $DirectoryBasicSearchEndPoint
      * @param $DirectoryBasicSearchEndPointAPIKEY
      */
-    public function __construct($apigeeApiKey, $webSSOApi, $cookieName, $returnURL, $ssoRedirectURL, $requiresMFA = true, $DirectoryBasicSearchEndPoint, $DirectoryBasicSearchEndPointAPIKEY)
+    public function __construct($apigeeApiKey, $webSSOApi, $returnURL, $ssoRedirectURL, $requiresMFA = true, $DirectoryBasicSearchEndPoint, $DirectoryBasicSearchEndPointAPIKEY)
     {
         $this->apigeeApiKey = $apigeeApiKey;
         $this->webSSOApi = $webSSOApi;
-        $this->cookieName = $cookieName;
+        //$this->cookieName = $cookieName;
         $this->returnURL = $returnURL;
         $this->ssoRedirectURL = $ssoRedirectURL;
         $this->requiresMFA = $requiresMFA;
