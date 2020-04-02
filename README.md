@@ -18,19 +18,19 @@ This third option allows for the forked functionality. Eventually, original func
 ```
 git clone https://github.com/NUSOC/openam-authentication.git
 cd openam-authentication
-git submodule update --init --recursive
-git pull --recurse-submodules
-wp plugin activate openam-authentication
-```
-Alternatively, if the above is not copying the most recent copy of the Laravel Plugin directly 
-
-```
-cd openam-authentication
-git clone https://github.com/NUSOC/laravel_openam2020.git
 ```
 
 ### From UI
 Set "Unofficial Forked 2020" and fill in all necessary fields in the under the *Forked* headline.  
+
+### Change Log
+
+April 2020 
+- Decoupled from the Laravel Plugin and copied the OpenAM2020 class into the main plugin. This should be easier to maintain rather than trying to too closely couple these two projects. 
+- Removed references to boolean MFA argument and cookie name argument as these really don't matter. The endpoint call doesn't seem to respect the require MFA anyway. 
+
+
+
 
 
 
