@@ -53,7 +53,7 @@ function openam_settings_init() {
 	//register_setting( 'openam_options', 'openam_forked_cookieName' );
 	register_setting( 'openam_options', 'openam_forked_returnURL' );
 	register_setting( 'openam_options', 'openam_forked_ssoRedirectURL' );
-	register_setting( 'openam_options', 'openam_forked_requiresMFA' );
+	//register_setting( 'openam_options', 'openam_forked_requiresMFA' );
 	register_setting( 'openam_options', 'openam_forked_DirectoryBasicSearchEndPoint' );
 	register_setting( 'openam_options', 'openam_forked_DirectoryBasicSearchEndPointAPIKEY' );
 
@@ -227,13 +227,13 @@ function openam_settings_init() {
         'openam_forked_settings_section'
     );
 
-    add_settings_field(
-        'openam_forked_requiresMFA',
-        __( 'Requires MFA', 'openam-auth' ),
-        'openam_forked_requiresMFA_settings_field_render',
-        'openam_options',
-        'openam_forked_settings_section'
-    );
+//    add_settings_field(
+//        'openam_forked_requiresMFA',
+//        __( 'Requires MFA', 'openam-auth' ),
+//        'openam_forked_requiresMFA_settings_field_render',
+//        'openam_options',
+//        'openam_forked_settings_section'
+//    );
 
     add_settings_field(
         'openam_forked_DirectoryBasicSearchEndPoint',
@@ -612,18 +612,18 @@ function openam_forked_ssoRedirectURL_settings_field_render() {
 
 }
 
-function openam_forked_requiresMFA_settings_field_render() {
-
-    ?>
-    <input type="text" name="openam_forked_requiresMFA" value="<?php echo esc_attr( get_option( 'openam_forked_requiresMFA' ) ); ?>" class="regular-text code"/>
-    <p class="description">
-        <?php esc_html_e( 'Requires MFA', 'openam-auth' ); ?>
-        <br>While this value should be true or false, I don't think the end point is respecting this data point. MFA/DUO is
-        controlled by the <code>SSO Redirect URL</code> field.
-    </p>
-    <?php
-
-}
+//function openam_forked_requiresMFA_settings_field_render() {
+//
+//    ?>
+<!--    <input type="text" name="openam_forked_requiresMFA" value="--><?php //echo esc_attr( get_option( 'openam_forked_requiresMFA' ) ); ?><!--" class="regular-text code"/>-->
+<!--    <p class="description">-->
+<!--        --><?php //esc_html_e( 'Requires MFA', 'openam-auth' ); ?>
+<!--        <br>While this value should be true or false, I don't think the end point is respecting this data point. MFA/DUO is-->
+<!--        controlled by the <code>SSO Redirect URL</code> field.-->
+<!--    </p>-->
+<!--    --><?php
+//
+//}
 
 
 function openam_forked_DirectoryBasicSearchEndPoint_settings_field_render() {
