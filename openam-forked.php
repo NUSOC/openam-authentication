@@ -101,8 +101,6 @@ class OpenAMForkedUtilities
         wp_set_auth_cookie($user->ID, 1, true);
 
 
-
-
         // Seems to be getting stuck at in the login_url action
         if ($calledfrom == 'login_url') {
             header("Location: https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
@@ -155,7 +153,15 @@ class OpenAMForkedUtilities
     }
 
 
+    static public function logout()
+    {
+        foreach (explode(';', $_SERVER['HTTP_COOKIE']) as $cookie) {
+            $cookie = explode('=', $cookie)[0];
+            setcookie($cookie, '', time() - 1000);
+            setcookie($cookie, '', time() - 1000, '/');
 
+        }
+    }
 
     public static function development()
     {

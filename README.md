@@ -1,15 +1,17 @@
-# openam-authentication plugin
+# openam-authentication plugin (forked to function with agent-less SSO)
 
 ## Warning
 *This code is not supported by ForgeRock and it is your responsibility to verify that the software is suitable and safe for use.*
 
-We're building this to transition our wordpress installations from FR OpenAM to our institutions. We've added a third option:
+We're building this to transition our wordpress installations from FR OpenAM to our institution's implementation of an "agentless SSO" through a centralized registry . We've added a third option so that when the institution decides to flip the switch, we'll be ready. 
+
+With the existing options that were already in the original version of this plugin, the third we've added is "Unofficially Forked". When chosen, all option value in the "Forked" section are used. 
+
 - 1.0
 - Legacy
 - Unofficially Forked 
 
-This third option allows for the Agent-less API call.  
-
+This third option allows for the forked functionality. Eventually, original functions this plugin will be deprecated. 
 
 ## To use
 ### From `wp-content/plugins`

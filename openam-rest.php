@@ -48,7 +48,7 @@ if (get_option('openam_api_version') == 'forked') {
     }, 10, 3);
     add_action('plugins_loaded', function() {
        // plugins loaded
-        OpenAMForkedUtilities::development();
+        // OpenAMForkedUtilities::development();
     });
 
 
