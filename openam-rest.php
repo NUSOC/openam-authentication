@@ -34,7 +34,7 @@ include 'plugin-update.php';
 
 
 // Forked: Include files
-include_once('laravel_openam2020/src/OpenAM2020.php');
+include_once('OpenAM2020.php');
 include_once('openam-forked.php');
 
 // FORKED: I'm trying to use this as the main way to branch off between everything.
