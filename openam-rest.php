@@ -30,7 +30,7 @@ defined('ABSPATH') or die();
 define('OPENAM_PLUGIN_VERSION', '1.5');
 
 include 'openam-settings.php';
-include 'plugin-update.php';
+
 
 
 // Forked: Include files
@@ -64,7 +64,7 @@ if (get_option('openam_api_version') == 'forked') {
 
 add_filter('logout_url', 'openam_logout', 10, 2);
 // add_filter('login_url', 'openam_login_url', 10, 2);
-add_action('plugins_loaded', 'openam_maybe_update', 8); // first thing to run here
+// add_action('plugins_loaded', 'openam_maybe_update', 8); // first thing to run here
 add_action('plugins_loaded', 'openam_setup_constants', 9); // second thing to run here
 add_action('plugins_loaded', 'openam_i18n');
 add_action('wp_logout', 'openam_wp_logout');
