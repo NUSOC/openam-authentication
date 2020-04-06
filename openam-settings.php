@@ -633,6 +633,9 @@ function openam_forked_DirectoryBasicSearchEndPoint_settings_field_render() {
     <p class="description">
         <?php esc_html_e( 'DirectoryBasicSearchEndPoint', 'openam-auth' ); ?>
         <br>This is the endpoint used to retrieve the email address associated with the NetID.
+        It is advisable to use the <i>production</i> basic directory search endpoint.
+        The development end point may be behind and not have a matching email address for
+        the NetID just retrieved
     </p>
     <?php
 
