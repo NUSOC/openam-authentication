@@ -29,6 +29,7 @@ To Do Summer 2020
 - Since IDM will sunset OpenAM Legacy, remove older functions by first commenting out and then finally deleting. 
 
 April 2020 
+- Removed some commented lines from -settings.php. They were causing HTML comments to be rendered and causing the 'header already sent warning'
 - Removed other files not directly accessed for plugin functionality. 
 - Decoupled from the Laravel Plugin and copied the OpenAM2020 class into the main plugin. This should be easier to maintain rather than trying to too closely couple these two projects. 
 - Removed references to boolean MFA argument and cookie name argument as these really don't matter. The endpoint call doesn't seem to respect the require MFA anyway. 
