@@ -581,16 +581,6 @@ function openam_forked_webSSOApi_settings_field_render() {
 }
 
 
-//function openam_forked_cookieName_settings_field_render() {
-//
-//    ?>
-<!--    <input type="text" name="openam_forked_cookieName" value="--><?php //echo esc_attr( get_option( 'openam_forked_cookieName' ) ); ?><!--" class="regular-text code"/>-->
-<!--    <p class="description">-->
-<!--        --><?php //esc_html_e( 'Cookie Name', 'openam-auth' ); ?>
-<!--    </p>-->
-<!--    --><?php
-//
-//}
 
 
 
@@ -611,19 +601,6 @@ function openam_forked_ssoRedirectURL_settings_field_render() {
     <?php
 
 }
-
-//function openam_forked_requiresMFA_settings_field_render() {
-//
-//    ?>
-<!--    <input type="text" name="openam_forked_requiresMFA" value="--><?php //echo esc_attr( get_option( 'openam_forked_requiresMFA' ) ); ?><!--" class="regular-text code"/>-->
-<!--    <p class="description">-->
-<!--        --><?php //esc_html_e( 'Requires MFA', 'openam-auth' ); ?>
-<!--        <br>While this value should be true or false, I don't think the end point is respecting this data point. MFA/DUO is-->
-<!--        controlled by the <code>SSO Redirect URL</code> field.-->
-<!--    </p>-->
-<!--    --><?php
-//
-//}
 
 
 function openam_forked_DirectoryBasicSearchEndPoint_settings_field_render() {
