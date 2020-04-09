@@ -73,7 +73,10 @@ class OpenAMForkedUtilities
 
         // Format return URL. This was a setting but it's still better to automatically
         // set this from $_SERVER variables.
-        $returnURL = 'https://' . $_SERVER['SERVER_NAME'];
+        // $returnURL = 'https://' . $_SERVER['SERVER_NAME'];
+
+        // Perhaps we need to render this to be from the home variable
+        $returnURL = get_home_url( get_current_network_id() ;
 
 
         // create object with all necessary information, keys, etc
