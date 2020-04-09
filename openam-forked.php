@@ -76,7 +76,7 @@ class OpenAMForkedUtilities
         // $returnURL = 'https://' . $_SERVER['SERVER_NAME'];
 
         // Perhaps we need to render this to be from the home variable
-        $returnURL = get_home_url( get_current_network_id() ;
+        $returnURL = get_home_url( get_current_network_id()) ;
 
 
         // create object with all necessary information, keys, etc
