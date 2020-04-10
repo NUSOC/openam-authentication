@@ -50,7 +50,7 @@ class OpenAMForkedUtilities
      * agentless SSO.
      *
      * OPENAM_API_VERSION == 'forked'
-     * @param string $calledfrom
+     * @param  $calledfrom
      */
     public static function openam_forked_decision_point ($calledfrom)
     {
