@@ -52,7 +52,7 @@ class OpenAMForkedUtilities
      * OPENAM_API_VERSION == 'forked'
      * @param string $calledfrom
      */
-    public static function openam_forked_decision_point(string $calledfrom)
+    public static function openam_forked_decision_point $calledfrom)
     {
 
 
