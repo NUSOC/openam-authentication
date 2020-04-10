@@ -51,7 +51,7 @@ class OpenAM2020
      */
     public function redirectToLogin()
     {
-        $redirect = urlencode($this->returnURL . $_SERVER['REQUEST_URI']);
+        $redirect = urlencode($this->returnURL);
         @header($this->ssoRedirectURL . $redirect);
         exit;
     }

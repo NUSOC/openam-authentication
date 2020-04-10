@@ -52,7 +52,7 @@ class OpenAMForkedUtilities
      * OPENAM_API_VERSION == 'forked'
      * @param string $calledfrom
      */
-    public static function openam_forked_decision_point $calledfrom)
+    public static function openam_forked_decision_point (string $calledfrom)
     {
 
 
@@ -62,7 +62,7 @@ class OpenAMForkedUtilities
         $is_user_admin = is_user_admin();
 
 
-            $cookieName = get_option('openam_forked_cookieName');
+         //   $cookieName = get_option('openam_forked_cookieName');
 
         // If the user is already loged in this is not necessary. So
         // just send the user back and let the page continue processing.
@@ -76,8 +76,14 @@ class OpenAMForkedUtilities
         // $returnURL = 'https://' . $_SERVER['SERVER_NAME'];
 
         // Perhaps we need to render this to be from the home variable
-        $returnURL = get_home_url( get_current_network_id()) ;
+        // $returnURL = get_home_url( get_current_network_id()) ;
 
+        // Perhaps we need to render this to be from the home variable. The following gets the host domain from the home_url(),
+        // and then prepends with secure-https:// and followed by the full REQUEST_URI. This is done so in case the home_url()
+        // contains a subpath. In this way we get the domain + the full request URI to make a complete URL. This should work
+        // in either URLs with folders or as the base.
+        $parts_of_url =  parse_url( home_url() );
+        $returnURL = 'https://' . $parts_of_url['host'] . $_SERVER['REQUEST_URI'];
 
         // create object with all necessary information, keys, etc
         $o = new \soc\OpenAM2020(
