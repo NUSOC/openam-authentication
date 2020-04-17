@@ -181,5 +181,9 @@ class OpenAM2020
         return $data->results[0]->mail;
     }
 
+
+
+
+
 }
 

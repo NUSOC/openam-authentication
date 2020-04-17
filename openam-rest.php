@@ -29,23 +29,24 @@ defined('ABSPATH') or die();
 
 define('OPENAM_PLUGIN_VERSION', '1.5');
 
-include 'openam-settings.php';
+include_once 'openam-settings.php';
 
 
 
 // Forked: Include files
 include_once('OpenAM2020.php');
 include_once('openam-forked.php');
+include_once('OpenAM2020CustomError.php');
 
 // FORKED: I'm trying to use this as the main way to branch off between everything.
 if (get_option('openam_api_version') == 'forked') {
 
     add_filter('login_url', function () {
-        OpenAMForkedUtilities::openam_forked_decision_point('login_url');
+        $result = OpenAMForkedUtilities::openam_forked_decision_point();
+        if (is_wp_error($result)) {
+            (new \soc\OpenAM2020CustomError())->DisplayCustomOpenAM2020ErrorAndDie("SSO Error", $result->get_error_message());
+        }
     });
-    add_filter('authenticate', function () {
-        OpenAMForkedUtilities::openam_forked_decision_point('authenticate');
-    }, 10, 3);
     add_action('plugins_loaded', function() {
        // plugins loaded
         // OpenAMForkedUtilities::development();

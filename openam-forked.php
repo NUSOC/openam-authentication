@@ -50,19 +50,18 @@ class OpenAMForkedUtilities
      * agentless SSO.
      *
      * OPENAM_API_VERSION == 'forked'
-     * @param  $calledfrom
+     * @return void|WP_Error
      */
-    public static function openam_forked_decision_point ($calledfrom)
+    public static function openam_forked_decision_point()
     {
 
 
         // Get the base information of everything below.
         $route = $_SERVER['REQUEST_URI'];
         $is_user_logged_in = is_user_logged_in();
-        $is_user_admin = is_user_admin();
 
 
-         //   $cookieName = get_option('openam_forked_cookieName');
+        //   $cookieName = get_option('openam_forked_cookieName');
 
         // If the user is already loged in this is not necessary. So
         // just send the user back and let the page continue processing.
@@ -82,7 +81,7 @@ class OpenAMForkedUtilities
         // and then prepends with secure-https:// and followed by the full REQUEST_URI. This is done so in case the home_url()
         // contains a subpath. In this way we get the domain + the full request URI to make a complete URL. This should work
         // in either URLs with folders or as the base.
-        $parts_of_url =  parse_url( home_url() );
+        $parts_of_url = parse_url(home_url());
         $returnURL = 'https://' . $parts_of_url['host'] . $_SERVER['REQUEST_URI'];
 
         // create object with all necessary information, keys, etc
@@ -93,27 +92,26 @@ class OpenAMForkedUtilities
 
         // grab email and netid›
         $run = $o->runAction();
-        $netid = $run['netid'];
-        $email = $run['email'];
+        $netid = trim($run['netid']);
+        $email = trim($run['email']);
 
         // Assuming we've got a good email and netid, find out if the user exists. If not create the user
         self::createIfNotExistAsSubscriber($netid, $email);
 
-        // login this user
-        // reference: https://developer.wordpress.org/reference/functions/wp_set_auth_cookie/
-        $user = get_user_by('email', $email);
-        wp_set_auth_cookie($user->ID, 1, true);
-
-
-        // Seems to be getting stuck at in the login_url action
-        if ($calledfrom == 'login_url') {
-            header("Location: https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-            die(); // always die after header
+        // Get User and test if it's a valid data by testing for the existence of the ID. If the user object fails to
+        // load, that's when the endless redirect happens.
+        $user = get_user_by('login', $netid);
+        if (! isset($user->id)) {
+            return new WP_Error('User failed to load', "Are you sure $netid exists in this site?");
         }
 
+        // login this user
+        // reference: https://developer.wordpress.org/reference/functions/wp_set_auth_cookie/
+        wp_set_auth_cookie($user->id    , 1, true);
 
-        // See mid process
-        // self::ShowRelevantDebugingInfomation($calledfrom, $is_user_admin, $is_user_logged_in, $netid, $email, $route);
+        @header("Location: $returnURL");
+        die(); // always die after header
+
 
     }
 
@@ -171,4 +169,6 @@ class OpenAMForkedUtilities
     {
 
     }
+
+
 }
