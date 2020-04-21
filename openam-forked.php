@@ -81,7 +81,7 @@ class OpenAMForkedUtilities
         // and then prepends with secure-https:// and followed by the full REQUEST_URI. This is done so in case the home_url()
         // contains a subpath. In this way we get the domain + the full request URI to make a complete URL. This should work
         // in either URLs with folders or as the base.
-        $parts_of_url = parse_url(home_url());
+        $parts_of_url = parse_url(site_url());
         $returnURL = 'https://' . $parts_of_url['host'] . $_SERVER['REQUEST_URI'];
 
         // create object with all necessary information, keys, etc
