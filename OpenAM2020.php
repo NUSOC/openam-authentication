@@ -190,17 +190,18 @@ class OpenAM2020
 
     /**
      * A self contained function that was added post-hoc to ensure that
-     * if MFA is set. That is, if the
+     * if MFA is set. That is, this attempts to minimize the any user
+     * changes to authIndexValue in an attempt to bypass MFA. If the site
+     * requires MFA and session-info says that DUO was not invoked, it will
+     * clear any WP auth cookies and redirect back to the SSO.
      *
      * @param string $token
-     *
-     *
      * @return bool|void
      */
     protected function ensureMFAedConnection(string $token)
     {
         // If this site doesn't require DUO/MFA, this function
-        // does nothing else. Return and continueß
+        // does nothing else.
         if (!$this->requiresMFA) {
             return;
         }
