@@ -17,7 +17,7 @@ class OpenAM2020
 
     protected $apigeeApiKey;
     protected $webSSOApi;
-   // protected $cookieName;
+    // protected $cookieName;
     protected $returnURL;
     protected $ssoRedirectURL;
     // protected $requiresMFA;
@@ -40,9 +40,12 @@ class OpenAM2020
         //$this->cookieName = $cookieName;
         $this->returnURL = $returnURL;
         $this->ssoRedirectURL = $ssoRedirectURL;
-       // $this->requiresMFA = $requiresMFA;
+        // $this->requiresMFA = $requiresMFA;
         $this->DirectoryBasicSearchEndPoint = $DirectoryBasicSearchEndPoint;
         $this->DirectoryBasicSearchEndPointAPIKEY = $DirectoryBasicSearchEndPointAPIKEY;
+
+        // Determine $this->requiresMFA flag
+        $this->requiresMFA = (stristr($this->ssoRedirectURL, 'ldap-and-duo') !== false) ? TRUE : FALSE;
     }
 
 
@@ -119,7 +122,7 @@ class OpenAM2020
                     "Content-Length: 0",
                     "apikey: " . $this->apigeeApiKey,
                     "webssotoken: $token",
-                 //   "requiresMFA: " . $this->requiresMFA,
+                    "requiresMFA: " . $this->requiresMFA,
                     "goto: ", // not using this functionality
                 ]),
                 'ignore_errors' => false,
@@ -180,9 +183,6 @@ class OpenAM2020
         $data = $this->getBasicDirectorySearchDataFromNetid($netid);
         return $data->results[0]->mail;
     }
-
-
-
 
 
 }
