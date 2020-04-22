@@ -1,5 +1,8 @@
 <?php
 
+// WP ABS or die
+defined('ABSPATH') or die();
+
 
 class OpenAMForkedUtilities
 {

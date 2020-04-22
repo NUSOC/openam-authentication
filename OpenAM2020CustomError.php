@@ -6,6 +6,10 @@ namespace soc;
 
 use WP_Fatal_Error_Handler;
 
+
+// WP ABS or die
+defined('ABSPATH') or die();
+
 class OpenAM2020CustomError extends WP_Fatal_Error_Handler
 {
 

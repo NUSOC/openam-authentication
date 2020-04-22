@@ -7,7 +7,7 @@ namespace soc;
  * @package soc
  */
 
-// WP
+// WP ABS or die
 defined('ABSPATH') or die();
 
 
