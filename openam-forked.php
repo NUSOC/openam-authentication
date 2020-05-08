@@ -104,13 +104,13 @@ class OpenAMForkedUtilities
         // Get User and test if it's a valid data by testing for the existence of the ID. If the user object fails to
         // load, that's when the endless redirect happens.
         $user = get_user_by('login', $netid);
-        if (! isset($user->id)) {
+        if (! isset($user->ID)) {
             return new WP_Error('User failed to load', "Are you sure $netid exists in this site?");
         }
 
         // login this user
         // reference: https://developer.wordpress.org/reference/functions/wp_set_auth_cookie/
-        wp_set_auth_cookie($user->id    , 1, true);
+        wp_set_auth_cookie($user->ID, 1, true);
 
         @header("Location: $returnURL");
         die(); // always die after header
