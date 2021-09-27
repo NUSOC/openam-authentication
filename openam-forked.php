@@ -85,18 +85,23 @@ class OpenAMForkedUtilities
         // contains a subpath. In this way we get the domain + the full request URI to make a complete URL. This should work
         // in either URLs with folders or as the base.
         $parts_of_url = parse_url(site_url());
-        $returnURL = 'https://' . $parts_of_url['host'] . $_SERVER['REQUEST_URI'];
+       // $returnURL = 'https://' . $parts_of_url['host'] . $_SERVER['REQUEST_URI'];
+        $returnURL = 'https://' . $parts_of_url['host'] . '/wp-admin';
 
+
+       
         // create object with all necessary information, keys, etc
         $o = new \soc\OpenAM2020(
             get_option('openam_forked_apigeeApiKey'), get_option('openam_forked_webSSOApi'), $returnURL, get_option('openam_forked_ssoRedirectURL'), get_option('openam_forked_DirectoryBasicSearchEndPoint'), get_option('openam_forked_DirectoryBasicSearchEndPointAPIKEY')
         );
-
+        
 
         // grab email and netid›
         $run = $o->runAction();
         $netid = trim($run['netid']);
         $email = trim($run['email']);
+
+
 
         // Assuming we've got a good email and netid, find out if the user exists. If not create the user
         self::createIfNotExistAsSubscriber($netid, $email);
@@ -111,6 +116,7 @@ class OpenAMForkedUtilities
         // login this user
         // reference: https://developer.wordpress.org/reference/functions/wp_set_auth_cookie/
         wp_set_auth_cookie($user->ID, 1, true);
+
 
         @header("Location: $returnURL");
         die(); // always die after header

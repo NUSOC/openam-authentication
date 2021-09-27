@@ -41,16 +41,19 @@ include_once('OpenAM2020CustomError.php');
 // FORKED: I'm trying to use this as the main way to branch off between everything.
 if (get_option('openam_api_version') == 'forked') {
 
-    add_filter('login_url', function () {
-        $result = OpenAMForkedUtilities::openam_forked_decision_point();
-        if (is_wp_error($result)) {
-            (new \soc\OpenAM2020CustomError())->DisplayCustomOpenAM2020ErrorAndDie("SSO Error", $result->get_error_message());
+    add_action('init', function () {
+
+        global $pagenow;
+       
+        if( 'wp-login.php' == $pagenow) {
+            print_r($pagenow);
+            $result = OpenAMForkedUtilities::openam_forked_decision_point();
+            if (is_wp_error($result)) {
+                (new \soc\OpenAM2020CustomError())->DisplayCustomOpenAM2020ErrorAndDie("SSO Error", $result->get_error_message());
+            }
         }
     });
-    add_action('plugins_loaded', function() {
-       // plugins loaded
-        // OpenAMForkedUtilities::development();
-    });
+  
 
 
 
