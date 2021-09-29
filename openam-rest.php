@@ -46,7 +46,10 @@ if (get_option('openam_api_version') == 'forked') {
         global $pagenow;
        
         if( 'wp-login.php' == $pagenow) {
+           
+            echo "<!--";
             print_r($pagenow);
+            echo "-->";
             $result = OpenAMForkedUtilities::openam_forked_decision_point();
             if (is_wp_error($result)) {
                 (new \soc\OpenAM2020CustomError())->DisplayCustomOpenAM2020ErrorAndDie("SSO Error", $result->get_error_message());
