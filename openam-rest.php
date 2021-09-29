@@ -3,7 +3,7 @@
 Plugin Name: OpenAM Authentication
 Plugin URI: https://forgerock.org
 Description: This plugin is used to authenticate users using OpenAM. The plugin uses REST calls to the OpenAM. The required REST APIs are: /json/authenticate; /json/users/ and /json/sessions. Therefore you need OpenAM 11.0 and above. This plugin is not supported officially by ForgeRock.
-Version: 1.5
+Version: 1.5.21.9
 Author: Victor info@forgerock.com, openam@forgerock.org (subscribe to mailing list firt)
 Author URI: http://www.forgerock.org
 Text Domain: openam-auth
