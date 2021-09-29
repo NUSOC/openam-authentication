@@ -47,9 +47,9 @@ if (get_option('openam_api_version') == 'forked') {
        
         if( 'wp-login.php' == $pagenow) {
            
-           
-            $result = OpenAMForkedUtilities::openam_forked_decision_point();
-
+            if ( !is_user_logged_in()) {
+                $result = OpenAMForkedUtilities::openam_forked_decision_point();
+            }
         
 
             if (is_wp_error($result)) {
