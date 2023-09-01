@@ -423,7 +423,7 @@ function openam_realm_settings_field_render() {
 	?>
 	<input type="text" name="openam_realm" value="<?php echo esc_attr( get_option( 'openam_realm' ) ); ?>" class="regular-text code">
 	<p class="description">
-		<?php printf( esc_html__( 'The OpenAM realm where users reside. Example: %1$s or %2$s', 'openam-auth' ), '<code>/</code>', '<code>/myrealm</code>' ); ?>
+		<!-- printf( esc_html__( 'The OpenAM realm where users reside. Example: %1$s or %2$s', 'openam-auth' ), '<code>/</code>', '<code>/myrealm</code>' ); -->
 	</p>
 	<?php
 
