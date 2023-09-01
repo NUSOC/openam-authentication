@@ -435,7 +435,7 @@ function openam_authn_module_settings_field_render() {
 	?>
 	<input type="text" name="openam_authn_module" value="<?php echo esc_attr( get_option( 'openam_authn_module' ) ); ?>" class="regular-text code">
 	<p class="description">
-		<?php printf( esc_html__( 'The Authentication module to use in the OpenAM. Example: %1$s or %2$', 'openam-auth' ), '<code>DataStore</code>', '<code>LDAP</code>' ); ?>
+		<! printf( esc_html__( 'The Authentication module to use in the OpenAM. Example: %1$s or %2$', 'openam-auth' ), '<code>DataStore</code>', '<code>LDAP</code>' ); -->
 		<br>
 		<italic><?php esc_html_e( 'Note: Module and Service Chain can not be used at the same time. This option can be left empty, in which case the default module configured in OpenAM wil be used.
 The module should only accept user and password, if that is not the case then enable “Redirect to OpenAM for Login”.', 'openam-auth' ); ?></italic>
